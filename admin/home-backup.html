@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit About - Portfolio Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Portfolio CMS</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <a href="dashboard.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Content</div>
+                    <a href="home.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="about.html" class="nav-link active">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        About
+                    </a>
+                    <a href="skills.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Skills
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Projects
+                    </a>
+                    <a href="coding-profiles.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        Coding Profiles
+                    </a>
+                    <a href="experience.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Experience
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div>
+                        <div class="user-name" id="userName">Admin</div>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-content">
+                    <h1 class="page-title">Edit About Page</h1>
+                    <p class="page-subtitle">Manage your bio, education, and profile information</p>
+                </div>
+                <a href="../about.html" target="_blank" class="btn-view-website">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    View Website
+                </a>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                Changes saved successfully!
+            </div>
+
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <form id="aboutForm">
+                    <!-- Card 1: Introduction -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">1. Introduction</h2>
+                            <p class="card-description">Introduce yourself and your main expertise</p>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="bio" class="form-textarea" rows="4" required placeholder="I'm a passionate AI Engineer specializing in..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Technical Skills -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">2. Technical Skills</h2>
+                            <p class="card-description">Describe your technical skills and teamwork experience</p>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="careerAspirations" class="form-textarea" rows="4" placeholder="Proficient in Python with frameworks like..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Experience -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">3. Experience</h2>
+                            <p class="card-description">Highlight your core knowledge and hands-on experience</p>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="practicalExperience" class="form-textarea" rows="4" placeholder="Strong foundations in algorithms..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Goals & Vision -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">4. Goals & Vision</h2>
+                            <p class="card-description">Share your aspirations and what you want to learn</p>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="communityEngagement" class="form-textarea" rows="4" placeholder="I'm eager to explore Large Language Models..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Education -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">5. Education</h2>
+                            <p class="card-description">Your academic background</p>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Degree</label>
+                                <input type="text" id="education" class="form-input" placeholder="BTech CSE - AI & ML">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Period</label>
+                                <input type="text" id="educationPeriod" class="form-input" placeholder="2022-2026">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">University</label>
+                            <input type="text" id="university" class="form-input" placeholder="Presidency University">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" id="location" class="form-input" placeholder="Bengaluru, India">
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Community (Hidden - auto-filled) -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">6. Community Engagement</h2>
+                            <p class="card-description">This section is auto-generated from your profiles</p>
+                        </div>
+                        <p style="color: #6e6e73; font-size: 15px; padding: 16px; background: #f5f5f7; border-radius: 8px;">
+                            "Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects."
+                        </p>
+                    </div>
+
+                    <!-- Contact & Social Links -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Contact & Social Links</h2>
+                            <p class="card-description">Your contact information and social profiles</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="email" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" id="phone" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Profile Image URL</label>
+                            <input type="url" id="profileImageUrl" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Resume URL</label>
+                            <input type="url" id="resumeUrl" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">LinkedIn</label>
+                            <input type="url" id="linkedin" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">GitHub</label>
+                            <input type="url" id="github" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">LeetCode</label>
+                            <input type="url" id="leetcode" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">HackerRank</label>
+                            <input type="url" id="hackerrank" class="form-input">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z"/>
+                        </svg>
+                        Save All Changes
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) window.location.href = 'login.html';
+        
+        const email = localStorage.getItem('adminEmail') || 'admin@example.com';
+        document.getElementById('userName').textContent = email.split('@')[0];
+        document.getElementById('userAvatar').textContent = email[0].toUpperCase();
+        
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'login.html';
+        }
+
+        // Load data
+        fetch('/api/admin/profile', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                const p = data.data;
+                document.getElementById('bio').value = p.bio || '';
+                document.getElementById('careerAspirations').value = p.careerAspirations || '';
+                document.getElementById('practicalExperience').value = p.practicalExperience || '';
+                document.getElementById('communityEngagement').value = p.communityEngagement || '';
+                document.getElementById('education').value = p.education || '';
+                document.getElementById('educationPeriod').value = p.educationPeriod || '';
+                document.getElementById('university').value = p.university || '';
+                document.getElementById('location').value = p.location || '';
+                document.getElementById('email').value = p.email || '';
+                document.getElementById('phone').value = p.phone || '';
+                document.getElementById('profileImageUrl').value = p.profileImage?.url || '';
+                document.getElementById('resumeUrl').value = p.resume?.url || '';
+                document.getElementById('linkedin').value = p.socialLinks?.linkedin || '';
+                document.getElementById('github').value = p.socialLinks?.github || '';
+                document.getElementById('leetcode').value = p.socialLinks?.leetcode || '';
+                document.getElementById('hackerrank').value = p.socialLinks?.hackerrank || '';
+                updatePreview();
+            }
+        });
+
+        document.querySelectorAll('.form-input, .form-textarea').forEach(input => {
+            input.addEventListener('input', () => {
+                // Auto-save could be added here
+            });
+        });
+
+        // Save data
+        document.getElementById('aboutForm').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const response = await fetch('/api/admin/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({
+                    bio: document.getElementById('bio').value,
+                    careerAspirations: document.getElementById('careerAspirations').value,
+                    practicalExperience: document.getElementById('practicalExperience').value,
+                    communityEngagement: document.getElementById('communityEngagement').value,
+                    education: document.getElementById('education').value,
+                    educationPeriod: document.getElementById('educationPeriod').value,
+                    university: document.getElementById('university').value,
+                    location: document.getElementById('location').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    profileImage: { url: document.getElementById('profileImageUrl').value },
+                    resume: { url: document.getElementById('resumeUrl').value },
+                    socialLinks: {
+                        linkedin: document.getElementById('linkedin').value,
+                        github: document.getElementById('github').value,
+                        leetcode: document.getElementById('leetcode').value,
+                        hackerrank: document.getElementById('hackerrank').value
+                    }
+                })
+            });
+            
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById('successMessage').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 3000);
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Skills - Portfolio Admin</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Portfolio CMS</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <a href="dashboard.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Content</div>
+                    <a href="home.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        About
+                    </a>
+                    <a href="skills.html" class="nav-link active">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Skills
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Projects
+                    </a>
+                    <a href="coding-profiles.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        Coding Profiles
+                    </a>
+                    <a href="experience.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Experience
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div>
+                        <div class="user-name" id="userName">Admin</div>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-content">
+                    <h1 class="page-title">Manage Skills</h1>
+                    <p class="page-subtitle">Add, edit, and organize your skill categories</p>
+                </div>
+                <a href="../skills.html" target="_blank" class="btn-view-website">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    View Website
+                </a>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span id="successText">Changes saved successfully!</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 24px;">
+                <!-- Skills List & Editor -->
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Skill Categories</h2>
+                            <button class="btn btn-primary" onclick="showAddForm()">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                </svg>
+                                Add Category
+                            </button>
+                        </div>
+                        
+                        <div id="skillsList"></div>
+                    </div>
+
+                    <!-- Edit Form (hidden by default) -->
+                    <div id="editForm" class="card" style="display: none;">
+                        <div class="card-header">
+                            <h2 class="card-title" id="formTitle">Add Skill Category</h2>
+                            <button class="btn-icon" onclick="hideForm()">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <form id="skillForm">
+                            <input type="hidden" id="skillId">
+                            
+                            <div class="form-group">
+                                <label class="form-label">Category Name</label>
+                                <input type="text" id="category" class="form-input" required placeholder="e.g., Programming Languages">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Icon</label>
+                                <input type="text" id="icon" class="form-input" placeholder="code">
+                                <div class="form-hint">Icon identifier (e.g., code, database, cloud)</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Skills (comma-separated)</label>
+                                <textarea id="skills" class="form-textarea" rows="3" placeholder="Python, JavaScript, Java"></textarea>
+                                <div class="form-hint">Separate each skill with a comma</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea id="description" class="form-textarea" rows="2"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="visible" checked> Visible on website
+                                </label>
+                            </div>
+
+                            <div style="display: flex; gap: 12px;">
+                                <button type="submit" class="btn btn-primary">Save Category</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Live Preview -->
+                <div>
+                    <div class="preview-panel">
+                        <div class="preview-header">LIVE PREVIEW</div>
+                        <div class="preview-device">
+                            <div style="padding: 20px; font-size: 12px;">
+                                <div style="font-weight: 700; margin-bottom: 16px;">Skills</div>
+                                <div id="previewSkills"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) window.location.href = 'login.html';
+        
+        const email = localStorage.getItem('adminEmail') || 'admin@example.com';
+        document.getElementById('userName').textContent = email.split('@')[0];
+        document.getElementById('userAvatar').textContent = email[0].toUpperCase();
+        
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'login.html';
+        }
+
+        let skills = [];
+
+        // Load skills
+        async function loadSkills() {
+            const response = await fetch('/api/admin/skills', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            const data = await response.json();
+            if (data.success) {
+                skills = data.data;
+                renderSkills();
+                updatePreview();
+            }
+        }
+
+        function renderSkills() {
+            const list = document.getElementById('skillsList');
+            if (skills.length === 0) {
+                list.innerHTML = '<div style="padding: 40px; text-align: center; color: #6e6e73;">No skills yet. Click "Add Category" to get started.</div>';
+                return;
+            }
+
+            list.innerHTML = skills.map(skill => `
+                <div class="list-item">
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${skill.category}</div>
+                        <div style="font-size: 13px; color: #6e6e73;">${skill.skills.join(', ')}</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-icon" onclick="editSkill('${skill._id}')" title="Edit">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                        </button>
+                        <button class="btn-icon" onclick="deleteSkill('${skill._id}')" title="Delete">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updatePreview() {
+            const preview = document.getElementById('previewSkills');
+            if (skills.length === 0) {
+                preview.innerHTML = '<div style="color: #6e6e73;">No skills to display</div>';
+                return;
+            }
+
+            preview.innerHTML = skills.filter(s => s.visible).map(skill => `
+                <div style="margin-bottom: 16px;">
+                    <div style="font-weight: 600; margin-bottom: 6px; font-size: 11px;">${skill.category}</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                        ${skill.skills.map(s => `<span style="background: #f5f5f7; padding: 4px 8px; border-radius: 6px; font-size: 10px;">${s}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showAddForm() {
+            document.getElementById('formTitle').textContent = 'Add Skill Category';
+            document.getElementById('skillForm').reset();
+            document.getElementById('skillId').value = '';
+            document.getElementById('visible').checked = true;
+            document.getElementById('editForm').style.display = 'block';
+            document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideForm() {
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        function editSkill(id) {
+            const skill = skills.find(s => s._id === id);
+            if (!skill) return;
+
+            document.getElementById('formTitle').textContent = 'Edit Skill Category';
+            document.getElementById('skillId').value = skill._id;
+            document.getElementById('category').value = skill.category;
+            document.getElementById('icon').value = skill.icon || '';
+            document.getElementById('skills').value = skill.skills.join(', ');
+            document.getElementById('description').value = skill.description || '';
+            document.getElementById('visible').checked = skill.visible !== false;
+            document.getElementById('editForm').style.display = 'block';
+            document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteSkill(id) {
+            if (!confirm('Delete this skill category?')) return;
+
+            const response = await fetch(`/api/admin/skills/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+
+            if (response.ok) {
+                showSuccess('Skill category deleted');
+                loadSkills();
+            }
+        }
+
+        document.getElementById('skillForm').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById('skillId').value;
+            const skillsText = document.getElementById('skills').value;
+            const skillsArray = skillsText.split(',').map(s => s.trim()).filter(s => s);
+
+            const data = {
+                category: document.getElementById('category').value,
+                icon: document.getElementById('icon').value,
+                skills: skillsArray,
+                description: document.getElementById('description').value,
+                visible: document.getElementById('visible').checked
+            };
+
+            const url = id ? `/api/admin/skills/${id}` : '/api/admin/skills';
+            const method = id ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                showSuccess(id ? 'Skill category updated' : 'Skill category added');
+                hideForm();
+                loadSkills();
+            }
+        };
+
+        function showSuccess(message) {
+            document.getElementById('successText').textContent = message;
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 3000);
+        }
+
+        loadSkills();
+    </script>
+</body>
+</html>

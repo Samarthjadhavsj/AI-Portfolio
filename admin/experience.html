@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Experience - Portfolio Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid #e5e5e7; }
+        .tab-btn { padding: 12px 20px; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; font-size: 14px; font-weight: 500; color: #6e6e73; transition: all 0.2s; }
+        .tab-btn.active { color: #0071e3; border-bottom-color: #0071e3; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Portfolio CMS</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <a href="dashboard.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Content</div>
+                    <a href="home.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        About
+                    </a>
+                    <a href="skills.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Skills
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Projects
+                    </a>
+                    <a href="coding-profiles.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        Coding Profiles
+                    </a>
+                    <a href="experience.html" class="nav-link active">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Experience
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div><div class="user-name" id="userName">Admin</div></div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-content">
+                    <h1 class="page-title">Manage Experience</h1>
+                    <p class="page-subtitle">Education, internships, achievements, and certifications</p>
+                </div>
+                <a href="../experience.html" target="_blank" class="btn-view-website">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    View Website
+                </a>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span id="successText">Changes saved!</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 24px;">
+                <div>
+                    <!-- Tabs -->
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="switchTab('education')">Education</button>
+                        <button class="tab-btn" onclick="switchTab('internship')">Internships</button>
+                        <button class="tab-btn" onclick="switchTab('achievement')">Achievements</button>
+                        <button class="tab-btn" onclick="switchTab('certification')">Certifications</button>
+                    </div>
+
+                    <!-- Education Tab -->
+                    <div id="education-tab" class="tab-content active">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Education</h2>
+                                <button class="btn btn-primary" onclick="showAddForm('education')">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Add Education
+                                </button>
+                            </div>
+                            <div id="educationList"></div>
+                        </div>
+                    </div>
+
+                    <!-- Internship Tab -->
+                    <div id="internship-tab" class="tab-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Internships & Professional Experience</h2>
+                                <button class="btn btn-primary" onclick="showAddForm('internship')">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Add Internship
+                                </button>
+                            </div>
+                            <div id="internshipList"></div>
+                        </div>
+                    </div>
+
+                    <!-- Achievement Tab -->
+                    <div id="achievement-tab" class="tab-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Achievements</h2>
+                                <button class="btn btn-primary" onclick="showAddForm('achievement')">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Add Achievement
+                                </button>
+                            </div>
+                            <div id="achievementList"></div>
+                        </div>
+                    </div>
+
+                    <!-- Certification Tab -->
+                    <div id="certification-tab" class="tab-content">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">Certifications</h2>
+                                <button class="btn btn-primary" onclick="showAddForm('certification')">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Add Certification
+                                </button>
+                            </div>
+                            <div id="certificationList"></div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Form -->
+                    <div id="editForm" class="card" style="display: none;">
+                        <div class="card-header">
+                            <h2 class="card-title" id="formTitle">Add Item</h2>
+                            <button class="btn-icon" onclick="hideForm()">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <form id="experienceForm">
+                            <input type="hidden" id="itemId">
+                            <input type="hidden" id="itemType">
+                            
+                            <div class="form-group">
+                                <label class="form-label">Title</label>
+                                <input type="text" id="title" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Organization</label>
+                                <input type="text" id="organization" class="form-input">
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Location</label>
+                                    <input type="text" id="location" class="form-input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Period</label>
+                                    <input type="text" id="period" class="form-input" placeholder="2022-2026">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea id="description" class="form-textarea" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Link (Certificate/Details)</label>
+                                <input type="url" id="link" class="form-input">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <input type="checkbox" id="visible" checked> Visible on website
+                                </label>
+                            </div>
+
+                            <div style="display: flex; gap: 12px;">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Live Preview -->
+                <div>
+                    <div class="preview-panel">
+                        <div class="preview-header">LIVE PREVIEW</div>
+                        <div class="preview-device">
+                            <div style="padding: 20px; font-size: 12px;">
+                                <div style="font-weight: 700; margin-bottom: 16px;">Experience</div>
+                                <div id="previewExperience"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) window.location.href = 'login.html';
+        
+        const email = localStorage.getItem('adminEmail') || 'admin@example.com';
+        document.getElementById('userName').textContent = email.split('@')[0];
+        document.getElementById('userAvatar').textContent = email[0].toUpperCase();
+        
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'login.html';
+        }
+
+        let experiences = [];
+        let currentTab = 'education';
+
+        function switchTab(type) {
+            currentTab = type;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(`${type}-tab`).classList.add('active');
+            updatePreview();
+        }
+
+        async function loadExperiences() {
+            const response = await fetch('/api/admin/experience', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            const data = await response.json();
+            if (data.success) {
+                experiences = data.data;
+                renderLists();
+                updatePreview();
+            }
+        }
+
+        function renderLists() {
+            ['education', 'internship', 'achievement', 'certification'].forEach(type => {
+                const items = experiences.filter(e => e.type === type);
+                const list = document.getElementById(`${type}List`);
+                
+                if (items.length === 0) {
+                    list.innerHTML = '<div style="padding: 40px; text-align: center; color: #6e6e73;">No items yet.</div>';
+                    return;
+                }
+
+                list.innerHTML = items.map(item => `
+                    <div class="list-item">
+                        <div>
+                            <div style="font-weight: 600; margin-bottom: 4px;">${item.title}</div>
+                            <div style="font-size: 13px; color: #6e6e73;">${item.organization || ''} ${item.period ? '• ' + item.period : ''}</div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-icon" onclick="editItem('${item._id}')" title="Edit">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" onclick="deleteItem('${item._id}')" title="Delete">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function updatePreview() {
+            const preview = document.getElementById('previewExperience');
+            const items = experiences.filter(e => e.type === currentTab && e.visible !== false).slice(0, 3);
+            
+            if (items.length === 0) {
+                preview.innerHTML = '<div style="color: #6e6e73;">No items to display</div>';
+                return;
+            }
+
+            // Special format for internships - show as grouped
+            if (currentTab === 'internship') {
+                preview.innerHTML = `
+                    <div style="margin-bottom: 16px;">
+                        <div style="font-weight: 700; margin-bottom: 12px; font-size: 12px;">Internships & Professional Experience</div>
+                        ${items.map((item, index) => `
+                            <div style="margin-top: ${index > 0 ? '12px' : '0'}; padding-top: ${index > 0 ? '12px' : '0'}; border-top: ${index > 0 ? '1px solid #f5f5f7' : 'none'};">
+                                <div style="font-weight: 600; margin-bottom: 4px; font-size: 11px;">${item.title}</div>
+                                <div style="color: #6e6e73; font-size: 10px;">${item.organization || ''}${item.location ? ' · ' + item.location : ''}</div>
+                                <div style="color: #6e6e73; font-size: 10px;">${item.period || ''}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                // Regular format for other types
+                preview.innerHTML = items.map(item => `
+                    <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #f5f5f7;">
+                        <div style="font-weight: 600; margin-bottom: 4px; font-size: 11px;">${item.title}</div>
+                        <div style="color: #6e6e73; font-size: 10px;">${item.organization || ''}</div>
+                        <div style="color: #6e6e73; font-size: 10px;">${item.period || ''}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function showAddForm(type) {
+            document.getElementById('formTitle').textContent = `Add ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            document.getElementById('experienceForm').reset();
+            document.getElementById('itemId').value = '';
+            document.getElementById('itemType').value = type;
+            document.getElementById('visible').checked = true;
+            document.getElementById('editForm').style.display = 'block';
+            document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideForm() {
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        function editItem(id) {
+            const item = experiences.find(e => e._id === id);
+            if (!item) return;
+
+            document.getElementById('formTitle').textContent = `Edit ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}`;
+            document.getElementById('itemId').value = item._id;
+            document.getElementById('itemType').value = item.type;
+            document.getElementById('title').value = item.title;
+            document.getElementById('organization').value = item.organization || '';
+            document.getElementById('location').value = item.location || '';
+            document.getElementById('period').value = item.period || '';
+            document.getElementById('description').value = item.description || '';
+            document.getElementById('link').value = item.link || '';
+            document.getElementById('visible').checked = item.visible !== false;
+            document.getElementById('editForm').style.display = 'block';
+            document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function deleteItem(id) {
+            if (!confirm('Delete this item?')) return;
+
+            const response = await fetch(`/api/admin/experience/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+
+            if (response.ok) {
+                showSuccess('Item deleted');
+                loadExperiences();
+            }
+        }
+
+        document.getElementById('experienceForm').onsubmit = async (e) => {
+            e.preventDefault();
+            
+            const id = document.getElementById('itemId').value;
+            const data = {
+                type: document.getElementById('itemType').value,
+                title: document.getElementById('title').value,
+                organization: document.getElementById('organization').value,
+                location: document.getElementById('location').value,
+                period: document.getElementById('period').value,
+                description: document.getElementById('description').value,
+                link: document.getElementById('link').value,
+                visible: document.getElementById('visible').checked
+            };
+
+            const url = id ? `/api/admin/experience/${id}` : '/api/admin/experience';
+            const method = id ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                showSuccess(id ? 'Item updated' : 'Item added');
+                hideForm();
+                loadExperiences();
+            }
+        };
+
+        function showSuccess(message) {
+            document.getElementById('successText').textContent = message;
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 3000);
+        }
+
+        loadExperiences();
+    </script>
+</body>
+</html>

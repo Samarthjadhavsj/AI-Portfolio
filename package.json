@@ -1,0 +1,55 @@
+{
+  "name": "fullstack-portfolio",
+  "version": "1.0.0",
+  "description": "Apple-inspired AI Engineer Portfolio with Full CMS",
+  "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seed.js",
+    "create-admin": "node scripts/create-admin.js",
+    "test:db": "node scripts/test-connection.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:ui": "jest --coverage --verbose",
+    "generate-secret": "node scripts/generate-jwt-secret.js",
+    "check-deployment": "node scripts/prepare-deployment.js",
+    "test-crud": "node scripts/test-admin-crud.js",
+    "test-ui": "node scripts/test-admin-ui.js",
+    "test-urls": "node scripts/test-urls.js",
+    "test-layout": "node scripts/test-dynamic-layout.js",
+    "test-all": "npm run test-crud && npm run test-ui && npm run test-urls && npm run check-deployment",
+    "deploy": "npm run test-all && vercel --prod"
+  },
+  "keywords": [
+    "portfolio",
+    "fullstack",
+    "apple-design"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2",
+    "multer": "^2.0.2",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^6.9.7"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/jest-dom": "^6.1.5",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nodemailer-mock": "^2.0.5",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  }
+}

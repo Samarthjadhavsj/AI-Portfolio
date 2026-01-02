@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages - Portfolio Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .status-badge { padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+        .status-new { background: #0071e3; color: white; }
+        .status-read { background: #f5f5f7; color: #6e6e73; }
+        .status-replied { background: #34c759; color: white; }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">Portfolio CMS</div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Overview</div>
+                    <a href="dashboard.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        Dashboard
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Content</div>
+                    <a href="home.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Home
+                    </a>
+                    <a href="about.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        About
+                    </a>
+                    <a href="skills.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Skills
+                    </a>
+                    <a href="projects.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        Projects
+                    </a>
+                    <a href="coding-profiles.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        Coding Profiles
+                    </a>
+                    <a href="experience.html" class="nav-link">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Experience
+                    </a>
+                    <a href="contact.html" class="nav-link active">
+                        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Contact
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div><div class="user-name" id="userName">Admin</div></div>
+                </div>
+                <button class="btn-logout" onclick="logout()">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-content">
+                    <h1 class="page-title">Contact Messages</h1>
+                    <p class="page-subtitle">View and manage contact form submissions</p>
+                </div>
+                <a href="../contact.html" target="_blank" class="btn-view-website">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    View Website
+                </a>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span id="successText">Status updated!</span>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Messages</h2>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-secondary" onclick="filterMessages('all')">All</button>
+                        <button class="btn btn-secondary" onclick="filterMessages('new')">New</button>
+                        <button class="btn btn-secondary" onclick="filterMessages('read')">Read</button>
+                    </div>
+                </div>
+                
+                <div id="messagesList"></div>
+            </div>
+
+            <!-- Message Detail Modal -->
+            <div id="messageModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; padding: 40px;">
+                <div style="max-width: 600px; margin: 0 auto; background: white; border-radius: 16px; padding: 32px; max-height: 80vh; overflow-y: auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px;">
+                        <h2 style="font-size: 24px; font-weight: 700;">Message Details</h2>
+                        <button class="btn-icon" onclick="closeModal()">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div id="messageDetail"></div>
+                    
+                    <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e5e5e7;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Update Status</label>
+                        <select id="statusSelect" class="form-input" style="margin-bottom: 12px;">
+                            <option value="new">New</option>
+                            <option value="read">Read</option>
+                            <option value="replied">Replied</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="updateStatus()">Update Status</button>
+                        <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('adminToken');
+        if (!token) window.location.href = 'login.html';
+        
+        const email = localStorage.getItem('adminEmail') || 'admin@example.com';
+        document.getElementById('userName').textContent = email.split('@')[0];
+        document.getElementById('userAvatar').textContent = email[0].toUpperCase();
+        
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'login.html';
+        }
+
+        let messages = [];
+        let currentFilter = 'all';
+        let selectedMessage = null;
+
+        async function loadMessages() {
+            const response = await fetch('/api/admin/contacts', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            const data = await response.json();
+            messages = data.contacts || [];
+            renderMessages();
+        }
+
+        function filterMessages(filter) {
+            currentFilter = filter;
+            renderMessages();
+        }
+
+        function renderMessages() {
+            const list = document.getElementById('messagesList');
+            let filtered = messages;
+            
+            if (currentFilter !== 'all') {
+                filtered = messages.filter(m => m.status === currentFilter);
+            }
+
+            if (filtered.length === 0) {
+                list.innerHTML = '<div style="padding: 40px; text-align: center; color: #6e6e73;">No messages found.</div>';
+                return;
+            }
+
+            list.innerHTML = filtered.map(msg => `
+                <div class="list-item" onclick="viewMessage('${msg._id}')" style="cursor: pointer;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 4px;">
+                            <span style="font-weight: 600;">${msg.name}</span>
+                            <span class="status-badge status-${msg.status}">${msg.status}</span>
+                        </div>
+                        <div style="font-size: 13px; color: #6e6e73; margin-bottom: 4px;">${msg.email}</div>
+                        <div style="font-size: 13px; color: #1d1d1f;">${msg.message.substring(0, 100)}...</div>
+                        <div style="font-size: 12px; color: #6e6e73; margin-top: 8px;">${new Date(msg.createdAt).toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function viewMessage(id) {
+            selectedMessage = messages.find(m => m._id === id);
+            if (!selectedMessage) return;
+
+            document.getElementById('messageDetail').innerHTML = `
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: #6e6e73; margin-bottom: 4px;">FROM</div>
+                    <div style="font-weight: 600;">${selectedMessage.name}</div>
+                    <div style="color: #0071e3;">${selectedMessage.email}</div>
+                </div>
+                
+                <div style="margin-bottom: 16px;">
+                    <div style="font-size: 12px; color: #6e6e73; margin-bottom: 4px;">MESSAGE</div>
+                    <div style="line-height: 1.6;">${selectedMessage.message}</div>
+                </div>
+                
+                <div>
+                    <div style="font-size: 12px; color: #6e6e73; margin-bottom: 4px;">RECEIVED</div>
+                    <div>${new Date(selectedMessage.createdAt).toLocaleString()}</div>
+                </div>
+            `;
+
+            document.getElementById('statusSelect').value = selectedMessage.status;
+            document.getElementById('messageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+            selectedMessage = null;
+        }
+
+        async function updateStatus() {
+            if (!selectedMessage) return;
+
+            const newStatus = document.getElementById('statusSelect').value;
+            
+            const response = await fetch(`/api/admin/contacts/${selectedMessage._id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (response.ok) {
+                showSuccess('Status updated');
+                closeModal();
+                loadMessages();
+            }
+        }
+
+        function showSuccess(message) {
+            document.getElementById('successText').textContent = message;
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 3000);
+        }
+
+        loadMessages();
+    </script>
+</body>
+</html>
