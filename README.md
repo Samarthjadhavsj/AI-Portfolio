@@ -161,7 +161,7 @@ Create a `.env` file in the root directory:
 
 ```env
 # MongoDB Database
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/DATABASE_NAME
 
 # Server Configuration
 NODE_ENV=development
