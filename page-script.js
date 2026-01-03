@@ -1,31 +1,34 @@
 // Page Script for Separate HTML Pages
 
-// Admin access - click "SAM" 5 times to access admin
+// Admin access - click "SAM" logo 5 times to access admin
 let clickCount = 0;
 let clickTimer = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) {
-        const samText = heroTitle.textContent.match(/SAM/i);
-        if (samText) {
-            heroTitle.style.cursor = 'pointer';
-            heroTitle.addEventListener('click', () => {
-                clickCount++;
-                
-                // Reset counter after 3 seconds of no clicks
-                clearTimeout(clickTimer);
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                }, 3000);
-                
-                // After 5 clicks, redirect to admin
-                if (clickCount === 5) {
-                    window.location.href = '/admin/login.html';
-                    clickCount = 0;
-                }
-            });
-        }
+    const samLogo = document.querySelector('.nav-logo');
+    if (samLogo) {
+        samLogo.addEventListener('click', (e) => {
+            e.preventDefault();
+            clickCount++;
+            
+            // Visual feedback
+            samLogo.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                samLogo.style.transform = 'scale(1)';
+            }, 100);
+            
+            // Reset counter after 3 seconds of no clicks
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 3000);
+            
+            // After 5 clicks, redirect to admin
+            if (clickCount === 5) {
+                window.location.href = '/admin/login.html';
+                clickCount = 0;
+            }
+        });
     }
 });
 
