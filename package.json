@@ -4,7 +4,7 @@
   "description": "Apple-inspired AI Engineer Portfolio with Full CMS",
   "main": "server.js",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "start": "node server.js",
