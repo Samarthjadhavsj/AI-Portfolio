@@ -32,9 +32,9 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from root directory
-app.use(express.static(path.join(__dirname)));
-app.use('/admin', express.static(path.join(__dirname, 'admin')));
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/admin', express.static(path.join(__dirname, 'public', 'admin')));
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -258,68 +258,68 @@ app.get('/api/health', (req, res) => {
 
 // Serve HTML pages
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'about.html'));
+    res.sendFile(path.join(__dirname, 'public', 'about.html'));
 });
 
 app.get('/projects', (req, res) => {
-    res.sendFile(path.join(__dirname, 'projects.html'));
+    res.sendFile(path.join(__dirname, 'public', 'projects.html'));
 });
 
 app.get('/skills', (req, res) => {
-    res.sendFile(path.join(__dirname, 'skills.html'));
+    res.sendFile(path.join(__dirname, 'public', 'skills.html'));
 });
 
 app.get('/experience', (req, res) => {
-    res.sendFile(path.join(__dirname, 'experience.html'));
+    res.sendFile(path.join(__dirname, 'public', 'experience.html'));
 });
 
 app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'contact.html'));
+    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
 });
 
 app.get('/coding-profiles', (req, res) => {
-    res.sendFile(path.join(__dirname, 'coding-profiles.html'));
+    res.sendFile(path.join(__dirname, 'public', 'coding-profiles.html'));
 });
 
 // Serve admin pages
 app.get('/admin/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'login.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'login.html'));
 });
 
 app.get('/admin/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'dashboard.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
 });
 
 app.get('/admin/home', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'home.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'home.html'));
 });
 
 app.get('/admin/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'about.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'about.html'));
 });
 
 app.get('/admin/projects', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'projects.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'projects.html'));
 });
 
 app.get('/admin/skills', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'skills.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'skills.html'));
 });
 
 app.get('/admin/experience', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'experience.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'experience.html'));
 });
 
 app.get('/admin/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'contact.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'contact.html'));
 });
 
 app.get('/admin/coding-profiles', (req, res) => {
-    res.sendFile(path.join(__dirname, 'admin', 'coding-profiles.html'));
+    res.sendFile(path.join(__dirname, 'public', 'admin', 'coding-profiles.html'));
 });
 
 // Start server (only in non-serverless environment)
