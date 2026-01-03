@@ -20,7 +20,7 @@ cp .env.example .env
 Then edit `.env` and add your MongoDB URI:
 
 ```bash
-MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@your-cluster.mongodb.net/your-database
+MONGODB_URI=your_mongodb_connection_string_here
 ```
 
 **Important:** Replace with your actual MongoDB connection string from MongoDB Atlas!
