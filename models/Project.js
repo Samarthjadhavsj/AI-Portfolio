@@ -24,8 +24,8 @@ const projectSchema = new mongoose.Schema({
     trim: true
   },
   image: {
-    url: String,
-    publicId: String
+    url: String, // Cloudinary URL
+    publicId: String // Cloudinary public ID
   },
   
   // Display Settings
