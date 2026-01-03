@@ -34,7 +34,7 @@ Click "Environment Variables" and add these:
 
 ```env
 MONGODB_URI
-mongodb+srv://samarthjadhavsj121:YOUR_NEW_PASSWORD@cluster0.pgy3ay3.mongodb.net/portfolio
+mongodb+srv://USERNAME:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/DATABASE_NAME
 
 NODE_ENV
 production

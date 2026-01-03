@@ -338,7 +338,7 @@ node scripts/create-admin.js
    
    Solution:
    Check the database name in your MongoDB connection string
-   Format: mongodb+srv://[username]:[password]@[cluster]/[database_name]
+   Format: mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/DATABASE_NAME
    Verify the database_name matches your MongoDB Atlas database
    ```
 

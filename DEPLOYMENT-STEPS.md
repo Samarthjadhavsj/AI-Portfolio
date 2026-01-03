@@ -82,7 +82,7 @@ git push -u origin main
 4. **Add Environment Variables:**
    Click "Environment Variables" and add:
    ```
-   MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@your-cluster.mongodb.net/your-database
+   MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/DATABASE_NAME
    JWT_SECRET=your-generated-secret
    NODE_ENV=production
    ADMIN_EMAIL=your-email@example.com
