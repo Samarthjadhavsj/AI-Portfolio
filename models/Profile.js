@@ -75,13 +75,17 @@ const profileSchema = new mongoose.Schema({
   
   // Media
   profileImage: {
-    url: String,
-    publicId: String // Cloudinary public ID
+    data: String, // Base64 encoded image
+    contentType: String, // image/jpeg, image/png, etc.
+    url: String, // Legacy field for backward compatibility
+    publicId: String // Legacy field
   },
   resume: {
-    url: String,
-    publicId: String,
-    filename: String
+    data: String, // Base64 encoded PDF
+    contentType: String,
+    filename: String,
+    url: String, // Legacy field
+    publicId: String // Legacy field
   },
   
   // Contact Info

@@ -37,8 +37,14 @@ async function loadProfile() {
         if (heroLocation) heroLocation.textContent = profile.location || 'Bengaluru, India';
         if (heroSubtitle) heroSubtitle.textContent = profile.subtitle;
         if (heroPassion) heroPassion.innerHTML = profile.bio || 'Passionate about AI and continuously learning to build innovative solutions.';
-        if (profileImage && profile.profileImage?.url) {
-            profileImage.src = profile.profileImage.url;
+        if (profileImage && profile.profileImage) {
+            // Check if we have Base64 data
+            if (profile.profileImage.data && profile.profileImage.contentType) {
+                profileImage.src = `data:${profile.profileImage.contentType};base64,${profile.profileImage.data}`;
+            } else if (profile.profileImage.url) {
+                // Fallback to URL for backward compatibility
+                profileImage.src = profile.profileImage.url;
+            }
             profileImage.alt = profile.name;
         }
 
