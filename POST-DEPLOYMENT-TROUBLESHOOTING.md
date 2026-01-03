@@ -337,9 +337,9 @@ node scripts/create-admin.js
    Cause: Database name wrong in connection string
    
    Solution:
-   mongodb+srv://user:pass@cluster.mongodb.net/portfolio
-                                                    ^^^^^^^^
-                                                    Check this name
+   mongodb+srv://USERNAME:PASSWORD@cluster.mongodb.net/DATABASE_NAME
+                                                       ^^^^^^^^^^^^^
+                                                       Check this name
    ```
 
 **Quick Fix:**

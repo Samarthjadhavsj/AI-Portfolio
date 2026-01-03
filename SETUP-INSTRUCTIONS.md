@@ -20,10 +20,10 @@ cp .env.example .env
 Then edit `.env` and add your MongoDB URI:
 
 ```bash
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/portfolio?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@your-cluster.mongodb.net/your-database
 ```
 
-**Important:** Replace `username` and `password` with your actual MongoDB credentials!
+**Important:** Replace with your actual MongoDB connection string from MongoDB Atlas!
 
 ## Step 3: Seed the Database
 
