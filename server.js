@@ -250,7 +250,41 @@ app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+// Serve HTML pages
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
+
+app.get('/about', (req, res) => {
+    res.sendFile(__dirname + '/about.html');
+});
+
+app.get('/projects', (req, res) => {
+    res.sendFile(__dirname + '/projects.html');
+});
+
+app.get('/skills', (req, res) => {
+    res.sendFile(__dirname + '/skills.html');
+});
+
+app.get('/experience', (req, res) => {
+    res.sendFile(__dirname + '/experience.html');
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(__dirname + '/contact.html');
+});
+
+app.get('/coding-profiles', (req, res) => {
+    res.sendFile(__dirname + '/coding-profiles.html');
+});
+
+// Start server (only in non-serverless environment)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel
+module.exports = app;
