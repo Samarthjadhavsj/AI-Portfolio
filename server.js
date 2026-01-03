@@ -32,12 +32,11 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from public directory
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/admin', express.static(path.join(__dirname, 'public', 'admin')));
+// Serve static files
+app.use(express.static(__dirname));
 
 // Serve uploaded files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static('uploads'));
 
 // Cache control based on environment
 if (process.env.NODE_ENV === 'production') {
@@ -256,78 +255,12 @@ app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Serve HTML pages
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-app.get('/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'about.html'));
-});
-
-app.get('/projects', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'projects.html'));
-});
-
-app.get('/skills', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'skills.html'));
-});
-
-app.get('/experience', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'experience.html'));
-});
-
-app.get('/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'contact.html'));
-});
-
-app.get('/coding-profiles', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'coding-profiles.html'));
-});
-
-// Serve admin pages
-app.get('/admin/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'login.html'));
-});
-
-app.get('/admin/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'dashboard.html'));
-});
-
-app.get('/admin/home', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'home.html'));
-});
-
-app.get('/admin/about', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'about.html'));
-});
-
-app.get('/admin/projects', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'projects.html'));
-});
-
-app.get('/admin/skills', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'skills.html'));
-});
-
-app.get('/admin/experience', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'experience.html'));
-});
-
-app.get('/admin/contact', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'contact.html'));
-});
-
-app.get('/admin/coding-profiles', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin', 'coding-profiles.html'));
-});
-
-// Start server (only in non-serverless environment)
+// Start server
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
     });
 }
 
-// Export for Vercel
+// Export for serverless platforms
 module.exports = app;
