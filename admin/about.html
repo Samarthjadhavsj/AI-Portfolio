@@ -319,11 +319,15 @@
             const bioLine1 = document.getElementById('bioLine1').value;
             const bioLine2 = document.getElementById('bioLine2').value;
             const combinedBio = bioLine1 + '\n\n' + bioLine2;
+            const communityEngagementValue = document.getElementById('communityEngagement').value;
+            
+            console.log('🔍 Community Engagement field value:', communityEngagementValue);
+            console.log('🔍 Field length:', communityEngagementValue.length);
             
             const payload = {
                 bio: combinedBio,
                 careerAspirations: document.getElementById('careerAspirations').value,
-                communityEngagement: document.getElementById('communityEngagement').value,
+                communityEngagement: communityEngagementValue,
                 education: document.getElementById('education').value,
                 educationPeriod: document.getElementById('educationPeriod').value,
                 university: document.getElementById('university').value,
@@ -340,7 +344,8 @@
                 }
             };
             
-            console.log('📦 Payload:', payload);
+            console.log('📦 Full Payload:', JSON.stringify(payload, null, 2));
+            console.log('📦 Community Engagement in payload:', payload.communityEngagement);
             
             try {
                 const response = await fetch('/api/admin/profile', {
@@ -354,6 +359,7 @@
                 
                 const data = await response.json();
                 console.log('📥 Response:', data);
+                console.log('📥 Saved communityEngagement:', data.data?.communityEngagement);
                 
                 if (data.success) {
                     document.getElementById('successMessage').classList.add('show');

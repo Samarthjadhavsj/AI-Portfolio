@@ -100,6 +100,8 @@ router.put('/profile', authenticateToken, async (req, res) => {
     console.log('📥 PUT /api/admin/profile received');
     console.log('📦 Request body:', JSON.stringify(req.body, null, 2));
     console.log('🎯 Hero data:', req.body.hero);
+    console.log('🔍 Community Engagement in request:', req.body.communityEngagement);
+    console.log('🔍 Community Engagement length:', req.body.communityEngagement?.length);
     
     const profile = await Profile.findOneAndUpdate(
       {},
@@ -109,6 +111,8 @@ router.put('/profile', authenticateToken, async (req, res) => {
     
     console.log('✅ Profile updated in database');
     console.log('💾 New hero values:', profile.hero);
+    console.log('💾 Saved communityEngagement:', profile.communityEngagement);
+    console.log('💾 Saved communityEngagement length:', profile.communityEngagement?.length);
     
     res.json({ success: true, data: profile });
   } catch (error) {

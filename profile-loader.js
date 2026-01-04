@@ -77,13 +77,15 @@ async function loadProfile() {
         
         // Community Engagement card shows communityEngagement
         if (bioCommunity) {
+            console.log('🎯 Found bio-community element');
             console.log('📦 Community Engagement from DB:', profile.communityEngagement);
+            console.log('📦 Type:', typeof profile.communityEngagement);
+            console.log('📦 Length:', profile.communityEngagement?.length);
+            console.log('📦 Is empty?', !profile.communityEngagement);
             bioCommunity.innerHTML = profile.communityEngagement || '';
-        }
-        if (bioCommunity) {
-            // This is in the right column below education - show community engagement
-            const communityText = `Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.`;
-            bioCommunity.innerHTML = communityText;
+            console.log('✅ Set innerHTML to:', bioCommunity.innerHTML.substring(0, 50) + '...');
+        } else {
+            console.log('❌ bio-community element NOT FOUND');
         }
 
         // Update education section

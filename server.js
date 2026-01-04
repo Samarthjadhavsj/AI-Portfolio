@@ -92,6 +92,9 @@ app.get('/api/profile', async (req, res) => {
         if (!profile) {
             return res.status(404).json({ error: 'Profile not found' });
         }
+        console.log('📤 Public API - Sending profile data');
+        console.log('📤 communityEngagement:', profile.communityEngagement);
+        console.log('📤 communityEngagement length:', profile.communityEngagement?.length);
         res.json(profile);
     } catch (error) {
         console.error('Profile fetch error:', error);
