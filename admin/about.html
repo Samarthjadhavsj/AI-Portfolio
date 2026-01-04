@@ -321,6 +321,11 @@
                 document.getElementById('github').value = p.socialLinks?.github || '';
                 document.getElementById('leetcode').value = p.socialLinks?.leetcode || '';
                 document.getElementById('hackerrank').value = p.socialLinks?.hackerrank || '';
+                
+                // Update resume preview if URL exists
+                if (p.resume?.url) {
+                    updateResumePreview(p.resume.url);
+                }
             }
         });
 
@@ -458,12 +463,7 @@
 
                 if (data.success) {
                     document.getElementById('resumeUrl').value = data.url;
-                    document.getElementById('resumePreview').innerHTML = `
-                        <div style="padding: 12px; background: #f5f5f7; border-radius: 8px;">
-                            <p style="margin: 0; font-size: 13px; color: #1d1d1f;">✅ Uploaded: ${data.originalName}</p>
-                            <p style="margin: 4px 0 0 0; font-size: 12px; color: #86868b;">Size: ${(data.size / 1024).toFixed(2)} KB</p>
-                        </div>
-                    `;
+                    updateResumePreview(data.url);
                     alert('Resume uploaded! Now click "Save All Changes" button below to apply it.');
                 } else {
                     alert('Upload failed: ' + data.message);
@@ -473,6 +473,49 @@
                 alert('Failed to upload resume');
             }
         }
+
+        // Update resume preview with View and Download buttons
+        function updateResumePreview(url) {
+            if (!url) {
+                document.getElementById('resumePreview').innerHTML = '';
+                return;
+            }
+
+            const isCloudinary = url.includes('cloudinary.com');
+            const viewUrl = isCloudinary ? '/api/resume/view' : url;
+            const downloadUrl = isCloudinary ? '/api/resume/download' : url;
+
+            document.getElementById('resumePreview').innerHTML = `
+                <div style="padding: 16px; background: #f5f5f7; border-radius: 8px;">
+                    <p style="margin: 0 0 12px 0; font-size: 13px; color: #1d1d1f; font-weight: 500;">✅ Resume Ready</p>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <a href="${viewUrl}" target="_blank" rel="noopener noreferrer" style="flex: 1; min-width: 120px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; background: #0071E3; color: white; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            View Resume
+                        </a>
+                        <a href="${downloadUrl}" style="flex: 1; min-width: 120px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 16px; background: white; color: #0071E3; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500; border: 2px solid #0071E3;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <p style="margin: 8px 0 0 0; font-size: 12px; color: #86868b;">
+                        ${isCloudinary ? 'Hosted on Cloudinary' : 'External URL (Google Drive, Dropbox, etc.)'}
+                    </p>
+                </div>
+            `;
+        }
+
+        // Listen for URL changes to update preview
+        document.getElementById('resumeUrl').addEventListener('input', function() {
+            updateResumePreview(this.value);
+        });
     </script>
 </body>
 </html>
