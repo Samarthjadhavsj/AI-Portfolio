@@ -36,8 +36,6 @@ async function loadProfile() {
         if (heroEducation) heroEducation.textContent = profile.education || 'BTech CSE - AI & ML';
         if (heroLocation) heroLocation.textContent = profile.location || 'Bengaluru, India';
         if (heroSubtitle) heroSubtitle.textContent = profile.subtitle;
-        // Remove bio from hero-passion - it will be shown in about page instead
-        if (heroPassion) heroPassion.innerHTML = 'Passionate about AI and continuously learning to build innovative solutions.';
         if (profileImage && profile.profileImage?.url) {
             profileImage.src = profile.profileImage.url;
             profileImage.alt = profile.name;
