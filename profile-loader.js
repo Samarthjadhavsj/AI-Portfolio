@@ -134,20 +134,23 @@ async function loadProfile() {
         if (profile.resume?.url) {
             console.log('📄 Resume URL found:', profile.resume.url);
             
-            // View button - opens PDF in browser
+            // View button - opens PDF in browser (inline display)
             if (resumeViewBtn) {
-                resumeViewBtn.href = profile.resume.url;
+                // For Cloudinary URLs, add fl_attachment:false to force inline viewing
+                const viewUrl = profile.resume.url.includes('cloudinary.com') 
+                    ? profile.resume.url.replace('/upload/', '/upload/fl_attachment:false/')
+                    : profile.resume.url;
+                resumeViewBtn.href = viewUrl;
                 resumeViewBtn.target = '_blank';
                 resumeViewBtn.rel = 'noopener noreferrer';
-                console.log('✅ View button configured');
+                console.log('✅ View button configured with URL:', viewUrl);
             }
             
             // Download button - downloads PDF directly
             if (resumeDownloadBtn) {
-                resumeDownloadBtn.href = profile.resume.url;
-                // For Cloudinary URLs, we need to add download parameter to force download
+                // For Cloudinary URLs, add fl_attachment to force download
                 const downloadUrl = profile.resume.url.includes('cloudinary.com') 
-                    ? profile.resume.url.replace('/upload/', '/upload/fl_attachment/')
+                    ? profile.resume.url.replace('/upload/', '/upload/fl_attachment:Samarth_Jadhav_Resume/')
                     : profile.resume.url;
                 resumeDownloadBtn.href = downloadUrl;
                 resumeDownloadBtn.setAttribute('download', 'Samarth_Jadhav_Resume.pdf');
