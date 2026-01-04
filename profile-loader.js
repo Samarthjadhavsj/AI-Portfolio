@@ -4,6 +4,7 @@ async function loadProfile() {
     try {
         const profile = await getProfile();
         console.log('📦 Profile data received:', profile);
+        console.log('📝 Community Engagement value:', profile.communityEngagement);
         
         if (!profile) {
             console.error('❌ Failed to load profile data');
@@ -76,7 +77,8 @@ async function loadProfile() {
         
         // Community Engagement card shows communityEngagement
         if (bioCommunity) {
-            bioCommunity.innerHTML = profile.communityEngagement || 'Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.';
+            console.log('📦 Community Engagement from DB:', profile.communityEngagement);
+            bioCommunity.innerHTML = profile.communityEngagement || '';
         }
         if (bioCommunity) {
             // This is in the right column below education - show community engagement
