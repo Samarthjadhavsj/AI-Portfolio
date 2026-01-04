@@ -4,8 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!form) return;
     
+    // Prevent multiple event listeners
+    if (form.dataset.initialized) return;
+    form.dataset.initialized = 'true';
+    
+    let isSubmitting = false; // Prevent double submission
+    
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // Prevent double submission
+        if (isSubmitting) return;
+        isSubmitting = true;
         
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
@@ -39,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = false;
             submitBtn.textContent = originalText;
             submitBtn.style.opacity = '1';
+            isSubmitting = false; // Reset flag
         }
     });
 });
