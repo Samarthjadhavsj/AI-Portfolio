@@ -36,7 +36,8 @@ async function loadProfile() {
         if (heroEducation) heroEducation.textContent = profile.education || 'BTech CSE - AI & ML';
         if (heroLocation) heroLocation.textContent = profile.location || 'Bengaluru, India';
         if (heroSubtitle) heroSubtitle.textContent = profile.subtitle;
-        if (heroPassion) heroPassion.innerHTML = profile.bio || 'Passionate about AI and continuously learning to build innovative solutions.';
+        // Remove bio from hero-passion - it will be shown in about page instead
+        if (heroPassion) heroPassion.innerHTML = 'Passionate about AI and continuously learning to build innovative solutions.';
         if (profileImage && profile.profileImage?.url) {
             profileImage.src = profile.profileImage.url;
             profileImage.alt = profile.name;
@@ -49,21 +50,34 @@ async function loadProfile() {
         if (careerCard) careerCard.innerHTML = profile.careerAspirations || '';
         if (experienceCard) experienceCard.innerHTML = profile.practicalExperience || '';
 
-        // Update about page sections - 4 bio paragraphs
+        // Update about page sections - Move bio to Career Aspirations and Practical Experience
         const bioIntro = document.querySelector('.bio-intro');
         const bioCareer = document.querySelector('.bio-career');
         const bioExperience = document.querySelector('.bio-experience');
         const bioGoals = document.querySelector('.bio-goals');
         const bioCommunity = document.querySelector('.bio-community');
 
-        if (bioIntro) bioIntro.innerHTML = profile.bio || '';
-        if (bioCareer) bioCareer.innerHTML = profile.careerAspirations || '';
-        if (bioExperience) bioExperience.innerHTML = profile.practicalExperience || '';
-        if (bioGoals) {
-            // This is the 4th paragraph in the left column - show goals/future interests
-            const goalsText = `I'm eager to explore <span class="text-purple">Large Language Models</span> and <span class="text-orange">Agentic AI</span> systems. My goal is to contribute to AI advancement while ensuring ethical and responsible implementation.`;
-            bioGoals.innerHTML = goalsText;
+        // Split bio into two parts
+        if (profile.bio) {
+            const bioText = profile.bio || '';
+            const bioParagraphs = bioText.split('\n\n').filter(p => p.trim());
+            
+            // First paragraph goes to Career Aspirations card
+            if (bioCareer && bioParagraphs[0]) {
+                bioCareer.innerHTML = bioParagraphs[0].trim();
+            }
+            
+            // Second paragraph goes to Practical Experience card
+            if (bioExperience && bioParagraphs[1]) {
+                bioExperience.innerHTML = bioParagraphs[1].trim();
+            }
         }
+        
+        // Introduction card shows careerAspirations
+        if (bioIntro) bioIntro.innerHTML = profile.careerAspirations || '';
+        
+        // Goals card shows practicalExperience
+        if (bioGoals) bioGoals.innerHTML = profile.practicalExperience || '';
         if (bioCommunity) {
             // This is in the right column below education - show community engagement
             const communityText = `Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.`;

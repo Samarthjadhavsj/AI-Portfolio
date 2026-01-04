@@ -107,54 +107,48 @@
 
             <div style="max-width: 1000px; margin: 0 auto;">
                 <form id="aboutForm">
-                    <!-- Card 1: Introduction -->
+                    <!-- Card 1: Bio for Career Aspirations & Practical Experience -->
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">1. Introduction</h2>
-                            <p class="card-description">Introduce yourself and your main expertise</p>
+                            <h2 class="card-title">1. Bio (Career Aspirations & Practical Experience Cards)</h2>
+                            <p class="card-description">These two lines will appear in the Career Aspirations and Practical Experience cards</p>
                         </div>
                         <div class="form-group">
-                            <textarea id="bio" class="form-textarea" rows="4" required placeholder="I'm a passionate AI Engineer specializing in..."></textarea>
+                            <label class="form-label">Line 1 (Career Aspirations Card)</label>
+                            <textarea id="bioLine1" class="form-textarea" rows="2" required placeholder="I'm a passionate AI Engineer specializing in..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Line 2 (Practical Experience Card)</label>
+                            <textarea id="bioLine2" class="form-textarea" rows="2" required placeholder="I design and deploy intelligent systems..."></textarea>
                         </div>
                     </div>
 
-                    <!-- Card 2: Technical Skills -->
+                    <!-- Card 2: Introduction Card -->
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">2. Technical Skills</h2>
-                            <p class="card-description">Describe your technical skills and teamwork experience</p>
+                            <h2 class="card-title">2. Introduction Card</h2>
+                            <p class="card-description">Content for the Introduction card on About page</p>
                         </div>
                         <div class="form-group">
-                            <textarea id="careerAspirations" class="form-textarea" rows="4" placeholder="Proficient in Python with frameworks like..."></textarea>
+                            <textarea id="careerAspirations" class="form-textarea" rows="4" placeholder="Introduce yourself and your main expertise..."></textarea>
                         </div>
                     </div>
 
-                    <!-- Card 3: Experience -->
+                    <!-- Card 3: Goals & Vision Card -->
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">3. Experience</h2>
-                            <p class="card-description">Highlight your core knowledge and hands-on experience</p>
+                            <h2 class="card-title">3. Goals & Vision Card</h2>
+                            <p class="card-description">Your aspirations and what you want to learn</p>
                         </div>
                         <div class="form-group">
-                            <textarea id="practicalExperience" class="form-textarea" rows="4" placeholder="Strong foundations in algorithms..."></textarea>
+                            <textarea id="practicalExperience" class="form-textarea" rows="4" placeholder="I'm eager to explore Large Language Models..."></textarea>
                         </div>
                     </div>
 
-                    <!-- Card 4: Goals & Vision -->
+                    <!-- Card 4: Education -->
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">4. Goals & Vision</h2>
-                            <p class="card-description">Share your aspirations and what you want to learn</p>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="communityEngagement" class="form-textarea" rows="4" placeholder="I'm eager to explore Large Language Models..."></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: Education -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">5. Education</h2>
+                            <h2 class="card-title">4. Education</h2>
                             <p class="card-description">Your academic background</p>
                         </div>
                         <div class="form-grid">
@@ -177,10 +171,10 @@
                         </div>
                     </div>
 
-                    <!-- Card 6: Community (Hidden - auto-filled) -->
+                    <!-- Card 5: Community (Hidden - auto-filled) -->
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">6. Community Engagement</h2>
+                            <h2 class="card-title">5. Community Engagement</h2>
                             <p class="card-description">This section is auto-generated from your profiles</p>
                         </div>
                         <p style="color: #6e6e73; font-size: 15px; padding: 16px; background: #f5f5f7; border-radius: 8px;">
