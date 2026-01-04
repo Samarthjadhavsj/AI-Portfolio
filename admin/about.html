@@ -385,7 +385,7 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    document.getElementById('profileImageUrl').value = window.location.origin + data.url;
+                    document.getElementById('profileImageUrl').value = data.url;
                     document.getElementById('profileImagePreview').innerHTML = `
                         <div style="padding: 12px; background: #f5f5f7; border-radius: 8px;">
                             <img src="${data.url}" alt="Profile" style="max-width: 200px; border-radius: 8px;">
@@ -424,7 +424,7 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    document.getElementById('resumeUrl').value = window.location.origin + data.url;
+                    document.getElementById('resumeUrl').value = data.url;
                     document.getElementById('resumePreview').innerHTML = `
                         <div style="padding: 12px; background: #f5f5f7; border-radius: 8px;">
                             <p style="margin: 0; font-size: 13px; color: #1d1d1f;">✅ Uploaded: ${data.originalName}</p>
