@@ -48,34 +48,31 @@ async function loadProfile() {
         if (careerCard) careerCard.innerHTML = profile.careerAspirations || '';
         if (experienceCard) experienceCard.innerHTML = profile.practicalExperience || '';
 
-        // Update about page sections - Move bio to Career Aspirations and Practical Experience
+        // Update about page sections - Map fields correctly
         const bioIntro = document.querySelector('.bio-intro');
         const bioCareer = document.querySelector('.bio-career');
         const bioExperience = document.querySelector('.bio-experience');
         const bioGoals = document.querySelector('.bio-goals');
         const bioCommunity = document.querySelector('.bio-community');
 
-        // Split bio into two parts
+        // Split bio into two parts for Technical Skills and Experience cards
         if (profile.bio) {
             const bioText = profile.bio || '';
             const bioParagraphs = bioText.split('\n\n').filter(p => p.trim());
             
-            // First paragraph goes to Career Aspirations card
+            // First paragraph goes to Technical Skills card
             if (bioCareer && bioParagraphs[0]) {
                 bioCareer.innerHTML = bioParagraphs[0].trim();
             }
             
-            // Second paragraph goes to Practical Experience card
+            // Second paragraph goes to Experience card
             if (bioExperience && bioParagraphs[1]) {
                 bioExperience.innerHTML = bioParagraphs[1].trim();
             }
         }
         
-        // Introduction card shows careerAspirations
-        if (bioIntro) bioIntro.innerHTML = profile.careerAspirations || '';
-        
-        // Goals card shows practicalExperience
-        if (bioGoals) bioGoals.innerHTML = profile.practicalExperience || '';
+        // Goals & Vision card shows careerAspirations
+        if (bioGoals) bioGoals.innerHTML = profile.careerAspirations || '';
         if (bioCommunity) {
             // This is in the right column below education - show community engagement
             const communityText = `Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.`;
