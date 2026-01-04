@@ -27,13 +27,15 @@ async function loadExperience() {
         // Group by type (excluding education)
         const grouped = {
             internship: experiences.filter(e => e.type === 'internship'),
-            achievement: experiences.filter(e => e.type === 'achievement')
+            achievement: experiences.filter(e => e.type === 'achievement'),
+            certification: experiences.filter(e => e.type === 'certification')
         };
 
         // Icon mapping
         const iconMap = {
             'internship': '💼',
-            'achievement': '🏆'
+            'achievement': '🏆',
+            'certification': '📜'
         };
 
         // Render each section
@@ -81,6 +83,28 @@ async function loadExperience() {
                             ${exp.link ? `<a href="${exp.link}" target="_blank" class="achievement-link">View Post →</a>` : ''}
                         </div>
                     `).join('')}
+                </div>
+            `;
+        }
+
+        if (grouped.certification.length > 0) {
+            html += `
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <h3 class="experience-role">Certifications</h3>
+                            <p class="experience-company">Professional Development</p>
+                        </div>
+                        ${grouped.certification[0].period ? `<p class="experience-period">${grouped.certification[0].period}</p>` : ''}
+                    </div>
+                    <div class="certifications-grid">
+                        ${grouped.certification.map(exp => `
+                            <div class="cert-item">
+                                <span class="cert-name">${exp.title}</span>
+                                ${exp.organization ? `<span class="cert-provider">${exp.organization}</span>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
         }
