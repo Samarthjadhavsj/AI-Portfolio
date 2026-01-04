@@ -1,58 +1,74 @@
 // Contact Form Handler
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm');
+(function() {
+    // Use IIFE to avoid global scope pollution
+    let formInitialized = false;
     
-    if (!form) return;
-    
-    // Prevent multiple event listeners
-    if (form.dataset.initialized) return;
-    form.dataset.initialized = 'true';
-    
-    let isSubmitting = false; // Prevent double submission
-    
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm');
         
-        // Prevent double submission
-        if (isSubmitting) return;
-        isSubmitting = true;
+        if (!form || formInitialized) return;
+        formInitialized = true;
         
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
+        let isSubmitting = false; // Prevent double submission
         
-        // Get form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject')?.value || '',
-            message: document.getElementById('message').value
-        };
-        
-        // Disable button and show loading
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.style.opacity = '0.6';
-        
-        try {
-            const response = await submitContact(formData);
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            e.stopImmediatePropagation(); // Stop any other handlers
             
-            if (response && response.success) {
-                // Show premium success overlay
-                showSuccessOverlay();
-                form.reset();
-            } else {
-                showErrorMessage();
+            // Prevent double submission
+            if (isSubmitting) {
+                console.log('⚠️ Already submitting, ignoring duplicate request');
+                return;
             }
-        } catch (error) {
-            showErrorMessage();
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-            submitBtn.style.opacity = '1';
-            isSubmitting = false; // Reset flag
-        }
+            
+            isSubmitting = true;
+            console.log('📤 Submitting contact form...');
+            
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject')?.value || '',
+                message: document.getElementById('message').value
+            };
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.6';
+            
+            try {
+                const response = await submitContact(formData);
+                
+                if (response && response.success) {
+                    console.log('✅ Message sent successfully');
+                    // Show premium success overlay
+                    showSuccessOverlay();
+                    form.reset();
+                } else {
+                    console.error('❌ Failed to send message');
+                    showErrorMessage();
+                }
+            } catch (error) {
+                console.error('❌ Error sending message:', error);
+                showErrorMessage();
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                submitBtn.style.opacity = '1';
+                
+                // Reset flag after a delay to prevent rapid resubmission
+                setTimeout(() => {
+                    isSubmitting = false;
+                    console.log('🔓 Form ready for next submission');
+                }, 1000);
+            }
+        }, { once: false }); // Don't use once: true as we want multiple submissions
     });
-});
+})();
 
 function showSuccessOverlay() {
     // Create overlay
