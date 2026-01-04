@@ -134,20 +134,18 @@ async function loadProfile() {
         if (profile.resume?.url) {
             console.log('📄 Resume URL found:', profile.resume.url);
             
-            // View button - opens PDF in browser
+            // View button - uses server proxy to view PDF inline
             if (resumeViewBtn) {
-                resumeViewBtn.href = profile.resume.url;
+                resumeViewBtn.href = '/api/resume/view';
                 resumeViewBtn.target = '_blank';
                 resumeViewBtn.rel = 'noopener noreferrer';
-                // Remove download attribute to allow viewing
-                resumeViewBtn.removeAttribute('download');
                 console.log('✅ View button configured');
             }
             
-            // Download button - downloads PDF directly
+            // Download button - uses server proxy to force download
             if (resumeDownloadBtn) {
-                resumeDownloadBtn.href = profile.resume.url;
-                resumeDownloadBtn.setAttribute('download', 'Samarth_Jadhav_Resume.pdf');
+                resumeDownloadBtn.href = '/api/resume/download';
+                resumeDownloadBtn.removeAttribute('download'); // Server handles this
                 console.log('✅ Download button configured');
             }
         } else {

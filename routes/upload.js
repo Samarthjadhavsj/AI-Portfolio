@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { upload } = require('../config/cloudinary');
+const { upload, cloudinary } = require('../config/cloudinary');
 
 // Upload endpoint - uses Cloudinary
 router.post('/upload', (req, res) => {
@@ -30,10 +30,21 @@ router.post('/upload', (req, res) => {
             }
 
             // Cloudinary automatically uploads and returns URL
+            let fileUrl = req.file.path;
+            
+            // For PDFs uploaded as 'raw', modify URL to allow inline viewing
+            // Cloudinary raw files are served with Content-Disposition: attachment by default
+            // We need to use a workaround: convert the URL to use fl_attachment flag control
+            if (req.file.mimetype === 'application/pdf') {
+                // The URL will be used for viewing - no attachment flag
+                // For downloads, we'll add fl_attachment in the frontend
+                console.log('📄 PDF uploaded:', fileUrl);
+            }
+            
             res.json({
                 success: true,
                 message: 'File uploaded successfully',
-                url: req.file.path, // Cloudinary URL
+                url: fileUrl, // Cloudinary URL
                 publicId: req.file.filename, // Cloudinary public ID
                 originalName: req.file.originalname,
                 size: req.file.size,

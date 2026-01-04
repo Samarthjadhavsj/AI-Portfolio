@@ -21,6 +21,7 @@ const Analytics = require('./models/Analytics');
 // Routes
 const adminRoutes = require('./routes/admin');
 const uploadRoutes = require('./routes/upload');
+const resumeRoutes = require('./routes/resume');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -80,6 +81,10 @@ app.use('/api/admin', adminRoutes);
 // UPLOAD ROUTES
 // ============================================
 app.use('/api', uploadRoutes);
+
+// RESUME ROUTES (View & Download)
+// ============================================
+app.use('/api/resume', resumeRoutes);
 
 // ============================================
 // PUBLIC API ROUTES
