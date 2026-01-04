@@ -24,40 +24,20 @@ async function loadExperience() {
             return;
         }
 
-        // Group by type
+        // Group by type (excluding education)
         const grouped = {
-            education: experiences.filter(e => e.type === 'education'),
             internship: experiences.filter(e => e.type === 'internship'),
-            achievement: experiences.filter(e => e.type === 'achievement'),
-            certification: experiences.filter(e => e.type === 'certification')
+            achievement: experiences.filter(e => e.type === 'achievement')
         };
 
         // Icon mapping
         const iconMap = {
-            'education': '🎓',
             'internship': '💼',
-            'achievement': '🏆',
-            'certification': '📜'
+            'achievement': '🏆'
         };
 
         // Render each section
         let html = '';
-
-        if (grouped.education.length > 0) {
-            html += grouped.education.map(exp => `
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h3 class="experience-role">${exp.title}</h3>
-                            <p class="experience-company">${exp.organization}${exp.location ? ', ' + exp.location : ''}</p>
-                        </div>
-                        ${exp.period ? `<p class="experience-period">${exp.period}</p>` : ''}
-                    </div>
-                    ${exp.description ? `<p class="experience-description">${exp.description}</p>` : ''}
-                    ${exp.link ? `<a href="${exp.link}" target="_blank" class="achievement-link">View Details →</a>` : ''}
-                </div>
-            `).join('');
-        }
 
         if (grouped.internship.length > 0) {
             html += `
@@ -101,28 +81,6 @@ async function loadExperience() {
                             ${exp.link ? `<a href="${exp.link}" target="_blank" class="achievement-link">View Post →</a>` : ''}
                         </div>
                     `).join('')}
-                </div>
-            `;
-        }
-
-        if (grouped.certification.length > 0) {
-            html += `
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h3 class="experience-role">Certifications</h3>
-                            <p class="experience-company">Professional Development</p>
-                        </div>
-                        ${grouped.certification[0].period ? `<p class="experience-period">${grouped.certification[0].period}</p>` : ''}
-                    </div>
-                    <div class="certifications-grid">
-                        ${grouped.certification.map(exp => `
-                            <div class="cert-item">
-                                <span class="cert-name">${exp.title}</span>
-                                ${exp.organization ? `<span class="cert-provider">${exp.organization}</span>` : ''}
-                            </div>
-                        `).join('')}
-                    </div>
                 </div>
             `;
         }
