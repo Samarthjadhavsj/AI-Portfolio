@@ -110,6 +110,21 @@
                 <span id="successText">Changes saved!</span>
             </div>
 
+            <!-- Page Subtitle Section -->
+            <div class="card" style="margin-bottom: 24px;">
+                <div class="card-header">
+                    <h2 class="card-title">Page Subtitle</h2>
+                    <p class="card-description">The subtitle text that appears below "Experience" heading</p>
+                </div>
+                <form id="subtitleForm" style="padding: 0 24px 24px;">
+                    <div class="form-group">
+                        <label class="form-label">Experience Page Subtitle</label>
+                        <input type="text" id="experienceSubtitle" class="form-input" placeholder="Building AI solutions through academic projects and hackathons">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Subtitle</button>
+                </form>
+            </div>
+
             <div style="display: grid; grid-template-columns: 1fr 400px; gap: 24px;">
                 <div>
                     <!-- Tabs -->
@@ -274,6 +289,39 @@
             localStorage.removeItem('adminEmail');
             window.location.href = 'login.html';
         }
+
+        // Load and save subtitle
+        fetch('/api/admin/profile', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('experienceSubtitle').value = data.data.experienceSubtitle || '';
+            }
+        });
+
+        document.getElementById('subtitleForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const response = await fetch('/api/admin/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({
+                    experienceSubtitle: document.getElementById('experienceSubtitle').value
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                document.getElementById('successText').textContent = 'Subtitle saved!';
+                document.getElementById('successMessage').classList.add('show');
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 3000);
+            }
+        };
 
         let experiences = [];
         let currentTab = 'education';
