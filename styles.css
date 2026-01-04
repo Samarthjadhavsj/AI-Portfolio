@@ -1504,7 +1504,8 @@ section {
 /* Info Cards Section */
 .info-cards-section {
     background: #f5f5f7;
-    padding: 80px 0;
+    padding: 40px 0 80px 0;
+    margin-top: -20px;
 }
 
 .info-cards-grid {
