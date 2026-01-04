@@ -65,13 +65,19 @@ if (process.env.NODE_ENV === 'production') {
 // app.use(express.static('.')); // Removed - now using path.join above
 
 // Email transporter configuration
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+let transporter = null;
+if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+    transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+    console.log('✅ Email transporter configured');
+} else {
+    console.log('⚠️ Email not configured - contact form will save to database only');
+}
 
 // ============================================
 // ADMIN ROUTES (Protected)
@@ -197,7 +203,10 @@ app.post('/api/contact', [
     // Validate input
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(400).json({ 
+            success: false,
+            errors: errors.array() 
+        });
     }
 
     const { name, email, subject, message } = req.body;
@@ -214,49 +223,56 @@ app.post('/api/contact', [
             userAgent: req.headers['user-agent'],
             referrer: req.headers.referer
         });
+        
+        console.log('✅ Contact form saved to database:', { name, email, subject });
     } catch (dbError) {
-        console.error('Database save error:', dbError);
-        // Continue with email even if DB save fails
-    }
-
-    // Email options
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        replyTo: email,
-        subject: subject || `Portfolio Contact from ${name}`,
-        html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #0071E3;">New Contact Form Submission</h2>
-                <div style="background: #f5f5f7; padding: 20px; border-radius: 12px; margin: 20px 0;">
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Email:</strong> ${email}</p>
-                    <p><strong>Subject:</strong> ${subject || 'Portfolio Contact'}</p>
-                </div>
-                <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0;">
-                    <p><strong>Message:</strong></p>
-                    <p style="line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
-                </div>
-                <p style="color: #6e6e73; font-size: 12px; margin-top: 20px;">
-                    Sent from your AI Engineer Portfolio
-                </p>
-            </div>
-        `
-    };
-
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).json({ 
-            message: 'Email sent successfully',
-            success: true 
-        });
-    } catch (error) {
-        console.error('Email error:', error);
-        res.status(500).json({ 
-            error: 'Failed to send email. Please try again later.',
-            success: false 
+        console.error('❌ Database save error:', dbError);
+        return res.status(500).json({ 
+            success: false,
+            error: 'Failed to save message. Please try again later.' 
         });
     }
+
+    // Try to send email if configured
+    if (transporter) {
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            replyTo: email,
+            subject: subject || `Portfolio Contact from ${name}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #0071E3;">New Contact Form Submission</h2>
+                    <div style="background: #f5f5f7; padding: 20px; border-radius: 12px; margin: 20px 0;">
+                        <p><strong>Name:</strong> ${name}</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Subject:</strong> ${subject || 'Portfolio Contact'}</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0;">
+                        <p><strong>Message:</strong></p>
+                        <p style="line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
+                    </div>
+                    <p style="color: #6e6e73; font-size: 12px; margin-top: 20px;">
+                        Sent from your AI Engineer Portfolio
+                    </p>
+                </div>
+            `
+        };
+
+        try {
+            await transporter.sendMail(mailOptions);
+            console.log('✅ Email sent successfully');
+        } catch (error) {
+            console.error('⚠️ Email error (message saved to database):', error.message);
+            // Don't fail the request - message is already saved to database
+        }
+    }
+
+    // Always return success if saved to database
+    res.status(200).json({ 
+        message: 'Message received successfully! I\'ll get back to you soon.',
+        success: true 
+    });
 });
 
 // Health check endpoint
