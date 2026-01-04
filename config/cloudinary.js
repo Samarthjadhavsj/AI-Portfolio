@@ -12,10 +12,17 @@ cloudinary.config({
 // Configure Cloudinary storage for multer
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    params: {
-        folder: 'portfolio',
-        allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf'],
-        transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
+    params: async (req, file) => {
+        // Check if file is PDF
+        const isPDF = file.mimetype === 'application/pdf';
+        
+        return {
+            folder: 'portfolio',
+            allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf'],
+            resource_type: isPDF ? 'raw' : 'image',
+            // Only apply transformations to images, not PDFs
+            transformation: isPDF ? undefined : [{ width: 1000, height: 1000, crop: 'limit' }]
+        };
     }
 });
 
