@@ -313,46 +313,59 @@
         document.getElementById('aboutForm').onsubmit = async (e) => {
             e.preventDefault();
             
+            console.log('🔄 Saving profile...');
+            
             // Combine bio lines with double line break
             const bioLine1 = document.getElementById('bioLine1').value;
             const bioLine2 = document.getElementById('bioLine2').value;
             const combinedBio = bioLine1 + '\n\n' + bioLine2;
             
-            const response = await fetch('/api/admin/profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({
-                    bio: combinedBio,
-                    careerAspirations: document.getElementById('careerAspirations').value,
-                    communityEngagement: document.getElementById('communityEngagement').value,
-                    education: document.getElementById('education').value,
-                    educationPeriod: document.getElementById('educationPeriod').value,
-                    university: document.getElementById('university').value,
-                    location: document.getElementById('location').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    profileImage: { url: document.getElementById('profileImageUrl').value },
-                    resume: { url: document.getElementById('resumeUrl').value },
-                    socialLinks: {
-                        linkedin: document.getElementById('linkedin').value,
-                        github: document.getElementById('github').value,
-                        leetcode: document.getElementById('leetcode').value,
-                        hackerrank: document.getElementById('hackerrank').value
-                    }
-                })
-            });
+            const payload = {
+                bio: combinedBio,
+                careerAspirations: document.getElementById('careerAspirations').value,
+                communityEngagement: document.getElementById('communityEngagement').value,
+                education: document.getElementById('education').value,
+                educationPeriod: document.getElementById('educationPeriod').value,
+                university: document.getElementById('university').value,
+                location: document.getElementById('location').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                profileImage: { url: document.getElementById('profileImageUrl').value },
+                resume: { url: document.getElementById('resumeUrl').value },
+                socialLinks: {
+                    linkedin: document.getElementById('linkedin').value,
+                    github: document.getElementById('github').value,
+                    leetcode: document.getElementById('leetcode').value,
+                    hackerrank: document.getElementById('hackerrank').value
+                }
+            };
             
-            const data = await response.json();
-            if (data.success) {
-                document.getElementById('successMessage').classList.add('show');
-                setTimeout(() => {
-                    document.getElementById('successMessage').classList.remove('show');
-                }, 3000);
-            } else {
-                alert('Failed to save: ' + (data.message || 'Unknown error'));
+            console.log('📦 Payload:', payload);
+            
+            try {
+                const response = await fetch('/api/admin/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                console.log('📥 Response:', data);
+                
+                if (data.success) {
+                    document.getElementById('successMessage').classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('successMessage').classList.remove('show');
+                    }, 3000);
+                } else {
+                    alert('Failed to save: ' + (data.message || data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('❌ Save error:', error);
+                alert('Failed to save: ' + error.message);
             }
         };
 
