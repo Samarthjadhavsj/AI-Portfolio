@@ -279,10 +279,14 @@
         .then(data => {
             if (data.success) {
                 const p = data.data;
-                document.getElementById('bio').value = p.bio || '';
+                
+                // Split bio into two lines if it exists
+                const bioText = p.bio || '';
+                const bioLines = bioText.split('\n\n');
+                document.getElementById('bioLine1').value = bioLines[0] || '';
+                document.getElementById('bioLine2').value = bioLines[1] || '';
+                
                 document.getElementById('careerAspirations').value = p.careerAspirations || '';
-                document.getElementById('practicalExperience').value = p.practicalExperience || '';
-                document.getElementById('communityEngagement').value = p.communityEngagement || '';
                 document.getElementById('education').value = p.education || '';
                 document.getElementById('educationPeriod').value = p.educationPeriod || '';
                 document.getElementById('university').value = p.university || '';
@@ -295,7 +299,6 @@
                 document.getElementById('github').value = p.socialLinks?.github || '';
                 document.getElementById('leetcode').value = p.socialLinks?.leetcode || '';
                 document.getElementById('hackerrank').value = p.socialLinks?.hackerrank || '';
-                updatePreview();
             }
         });
 
@@ -309,6 +312,11 @@
         document.getElementById('aboutForm').onsubmit = async (e) => {
             e.preventDefault();
             
+            // Combine bio lines with double line break
+            const bioLine1 = document.getElementById('bioLine1').value;
+            const bioLine2 = document.getElementById('bioLine2').value;
+            const combinedBio = bioLine1 + '\n\n' + bioLine2;
+            
             const response = await fetch('/api/admin/profile', {
                 method: 'PUT',
                 headers: {
@@ -316,10 +324,8 @@
                     'Authorization': 'Bearer ' + token
                 },
                 body: JSON.stringify({
-                    bio: document.getElementById('bio').value,
+                    bio: combinedBio,
                     careerAspirations: document.getElementById('careerAspirations').value,
-                    practicalExperience: document.getElementById('practicalExperience').value,
-                    communityEngagement: document.getElementById('communityEngagement').value,
                     education: document.getElementById('education').value,
                     educationPeriod: document.getElementById('educationPeriod').value,
                     university: document.getElementById('university').value,
@@ -343,6 +349,8 @@
                 setTimeout(() => {
                     document.getElementById('successMessage').classList.remove('show');
                 }, 3000);
+            } else {
+                alert('Failed to save: ' + (data.message || 'Unknown error'));
             }
         };
 
