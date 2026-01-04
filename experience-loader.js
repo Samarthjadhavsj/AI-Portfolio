@@ -13,6 +13,13 @@ async function loadExperience() {
     `;
 
     try {
+        // Load profile for subtitle
+        const profile = await getProfile();
+        const subtitleElement = document.querySelector('.experience-subtitle');
+        if (subtitleElement && profile?.experienceSubtitle) {
+            subtitleElement.textContent = profile.experienceSubtitle;
+        }
+
         const experiences = await getExperience();
         
         if (!experiences || experiences.length === 0) {

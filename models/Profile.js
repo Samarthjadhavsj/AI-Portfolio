@@ -33,6 +33,11 @@ const profileSchema = new mongoose.Schema({
     trim: true,
     default: 'Designing intelligent systems that learn, adapt, and scale.'
   },
+  experienceSubtitle: {
+    type: String,
+    trim: true,
+    default: 'Building AI solutions through academic projects and hackathons'
+  },
   education: {
     type: String,
     trim: true,
