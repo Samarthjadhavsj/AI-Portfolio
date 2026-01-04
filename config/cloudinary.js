@@ -16,17 +16,25 @@ const storage = new CloudinaryStorage({
         // Check if file is PDF
         const isPDF = file.mimetype === 'application/pdf';
         
-        return {
-            folder: 'portfolio',
-            allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'pdf'],
-            // Use 'image' resource type for PDFs to allow inline viewing
-            // Cloudinary treats PDFs as images when uploaded this way
-            resource_type: isPDF ? 'image' : 'image',
-            // Only apply transformations to actual images, not PDFs
-            transformation: isPDF ? undefined : [{ width: 1000, height: 1000, crop: 'limit' }],
-            // Don't set any flags - let browser handle display
-            flags: undefined
-        };
+        if (isPDF) {
+            // For PDFs: use 'raw' resource type with no transformations
+            return {
+                folder: 'portfolio',
+                allowed_formats: ['pdf'],
+                resource_type: 'raw',
+                // No transformations for PDFs
+                transformation: undefined,
+                flags: undefined
+            };
+        } else {
+            // For images: use 'image' resource type with transformations
+            return {
+                folder: 'portfolio',
+                allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'],
+                resource_type: 'image',
+                transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
+            };
+        }
     }
 });
 

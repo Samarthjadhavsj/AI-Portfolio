@@ -207,18 +207,39 @@
                         <!-- Resume Upload -->
                         <div class="form-group">
                             <label class="form-label">Resume</label>
-                            <div style="display: flex; gap: 12px; align-items: flex-start;">
-                                <div style="flex: 1;">
-                                    <input type="file" id="resumeFile" accept=".pdf" class="form-input" style="padding: 8px;">
-                                    <small style="color: #86868b; font-size: 13px; display: block; margin-top: 6px;">
-                                        Upload PDF (Max 30MB)
-                                    </small>
+                            
+                            <!-- Option 1: Upload to Cloudinary -->
+                            <div style="margin-bottom: 16px; padding: 12px; background: #f5f5f7; border-radius: 8px;">
+                                <strong style="font-size: 14px; color: #1d1d1f;">Option 1: Upload PDF</strong>
+                                <div style="display: flex; gap: 12px; align-items: flex-start; margin-top: 8px;">
+                                    <div style="flex: 1;">
+                                        <input type="file" id="resumeFile" accept=".pdf" class="form-input" style="padding: 8px;">
+                                        <small style="color: #86868b; font-size: 13px; display: block; margin-top: 6px;">
+                                            Upload PDF (Max 30MB)
+                                        </small>
+                                    </div>
+                                    <button type="button" onclick="uploadResume()" class="btn" style="background: #0071E3; color: white; padding: 10px 20px; white-space: nowrap;">
+                                        Upload
+                                    </button>
                                 </div>
-                                <button type="button" onclick="uploadResume()" class="btn" style="background: #0071E3; color: white; padding: 10px 20px; white-space: nowrap;">
-                                    Upload
-                                </button>
                             </div>
-                            <input type="url" id="resumeUrl" class="form-input" placeholder="Or paste resume URL" style="margin-top: 12px;">
+                            
+                            <!-- Option 2: Google Drive (Recommended) -->
+                            <div style="margin-bottom: 16px; padding: 12px; background: #e8f5e9; border-radius: 8px; border: 1px solid #4caf50;">
+                                <strong style="font-size: 14px; color: #2e7d32;">✨ Option 2: Google Drive (Recommended)</strong>
+                                <ol style="margin: 8px 0 0 0; padding-left: 20px; font-size: 13px; color: #1d1d1f; line-height: 1.6;">
+                                    <li>Upload your resume PDF to Google Drive</li>
+                                    <li>Right-click → Share → Change to "Anyone with the link"</li>
+                                    <li>Copy the share link</li>
+                                    <li>Paste it in the URL field below</li>
+                                </ol>
+                                <small style="color: #2e7d32; font-size: 12px; display: block; margin-top: 6px;">
+                                    ✅ Benefits: No size limit, easy to update, works perfectly for view/download
+                                </small>
+                            </div>
+                            
+                            <!-- URL Input -->
+                            <input type="url" id="resumeUrl" class="form-input" placeholder="Paste Google Drive link or Cloudinary URL" style="margin-top: 12px;">
                             <div id="resumePreview" style="margin-top: 12px;"></div>
                         </div>
                         

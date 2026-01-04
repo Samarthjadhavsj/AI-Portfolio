@@ -134,20 +134,46 @@ async function loadProfile() {
         if (profile.resume?.url) {
             console.log('📄 Resume URL found:', profile.resume.url);
             
-            // View button - uses server proxy to view PDF inline
-            if (resumeViewBtn) {
-                resumeViewBtn.href = '/api/resume/view';
-                resumeViewBtn.target = '_blank';
-                resumeViewBtn.rel = 'noopener noreferrer';
-                console.log('✅ View button configured');
+            const resumeUrl = profile.resume.url;
+            
+            // Check if it's a Cloudinary URL - use proxy
+            // Otherwise use direct URL (Google Drive, Dropbox, etc.)
+            const isCloudinary = resumeUrl.includes('cloudinary.com');
+            
+            if (isCloudinary) {
+                // Use server proxy for Cloudinary URLs
+                if (resumeViewBtn) {
+                    resumeViewBtn.href = '/api/resume/view';
+                    resumeViewBtn.target = '_blank';
+                    resumeViewBtn.rel = 'noopener noreferrer';
+                }
+                
+                if (resumeDownloadBtn) {
+                    resumeDownloadBtn.href = '/api/resume/download';
+                }
+            } else {
+                // Direct URL (Google Drive, Dropbox, etc.) - works natively
+                if (resumeViewBtn) {
+                    resumeViewBtn.href = resumeUrl;
+                    resumeViewBtn.target = '_blank';
+                    resumeViewBtn.rel = 'noopener noreferrer';
+                }
+                
+                if (resumeDownloadBtn) {
+                    // For Google Drive, modify URL to force download
+                    let downloadUrl = resumeUrl;
+                    if (resumeUrl.includes('drive.google.com')) {
+                        // Convert Google Drive view link to download link
+                        const fileId = resumeUrl.match(/\/d\/([^\/]+)/)?.[1];
+                        if (fileId) {
+                            downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                        }
+                    }
+                    resumeDownloadBtn.href = downloadUrl;
+                }
             }
             
-            // Download button - uses server proxy to force download
-            if (resumeDownloadBtn) {
-                resumeDownloadBtn.href = '/api/resume/download';
-                resumeDownloadBtn.removeAttribute('download'); // Server handles this
-                console.log('✅ Download button configured');
-            }
+            console.log('✅ Resume buttons configured');
         } else {
             console.log('⚠️ No resume URL found in profile');
         }
