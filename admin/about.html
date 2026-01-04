@@ -160,15 +160,15 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: Community (Auto-generated) -->
+                    <!-- Card 4: Community (Editable) -->
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title">4. Community Engagement</h2>
-                            <p class="card-description">This section is auto-generated from your profiles</p>
+                            <p class="card-description">Your engagement with the AI community</p>
                         </div>
-                        <p style="color: #6e6e73; font-size: 15px; padding: 16px; background: #f5f5f7; border-radius: 8px;">
-                            "Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects."
-                        </p>
+                        <div class="form-group">
+                            <textarea id="communityEngagement" class="form-textarea" rows="4" placeholder="I maintain an active presence on LinkedIn..."></textarea>
+                        </div>
                     </div>
 
                     <!-- Contact & Social Links -->
@@ -287,6 +287,7 @@
                 document.getElementById('bioLine2').value = bioLines[1] || '';
                 
                 document.getElementById('careerAspirations').value = p.careerAspirations || '';
+                document.getElementById('communityEngagement').value = p.communityEngagement || '';
                 document.getElementById('education').value = p.education || '';
                 document.getElementById('educationPeriod').value = p.educationPeriod || '';
                 document.getElementById('university').value = p.university || '';
@@ -326,6 +327,7 @@
                 body: JSON.stringify({
                     bio: combinedBio,
                     careerAspirations: document.getElementById('careerAspirations').value,
+                    communityEngagement: document.getElementById('communityEngagement').value,
                     education: document.getElementById('education').value,
                     educationPeriod: document.getElementById('educationPeriod').value,
                     university: document.getElementById('university').value,

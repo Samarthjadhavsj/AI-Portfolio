@@ -73,6 +73,11 @@ async function loadProfile() {
         
         // Goals & Vision card shows careerAspirations
         if (bioGoals) bioGoals.innerHTML = profile.careerAspirations || '';
+        
+        // Community Engagement card shows communityEngagement
+        if (bioCommunity) {
+            bioCommunity.innerHTML = profile.communityEngagement || 'Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.';
+        }
         if (bioCommunity) {
             // This is in the right column below education - show community engagement
             const communityText = `Actively engaged with the AI community through LeetCode, HackerRank, and open-source contributions. I believe in continuous learning, staying curious about emerging AI trends, and collaborating on innovative projects.`;
