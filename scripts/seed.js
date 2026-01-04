@@ -38,6 +38,7 @@ const seedData = async () => {
       location: 'Bengaluru, India',
       bio: 'Passionate about AI and continuously learning to build innovative solutions.',
       careerAspirations: 'Driven to build a career in AI, ML, and Data Science. Passionate about developing advanced systems that solve real-world problems.',
+      goalsVision: 'My vision is to become a proficient AI engineer who contributes meaningfully to the advancement of artificial intelligence.',
       practicalExperience: 'Hands-on experience in ML and Data Science through academic projects and personal initiatives.',
       communityEngagement: 'Actively engaged with the AI community through platforms like LinkedIn and GitHub.',
       email: 'samarthjadhavsj121@gmail.com',

@@ -64,6 +64,10 @@ const profileSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  goalsVision: {
+    type: String,
+    trim: true
+  },
   practicalExperience: {
     type: String,
     trim: true

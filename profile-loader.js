@@ -72,8 +72,8 @@ async function loadProfile() {
             }
         }
         
-        // Goals & Vision card shows careerAspirations
-        if (bioGoals) bioGoals.innerHTML = profile.careerAspirations || '';
+        // Goals & Vision card shows goalsVision (separate from careerAspirations)
+        if (bioGoals) bioGoals.innerHTML = profile.goalsVision || '';
         
         // Community Engagement card shows communityEngagement
         if (bioCommunity) {

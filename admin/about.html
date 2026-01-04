@@ -130,7 +130,7 @@
                             <p class="card-description">Content for the Goals & Vision card on About page</p>
                         </div>
                         <div class="form-group">
-                            <textarea id="careerAspirations" class="form-textarea" rows="4" placeholder="I'm eager to explore Large Language Models..."></textarea>
+                            <textarea id="goalsVision" class="form-textarea" rows="4" placeholder="My vision is to become a proficient AI engineer..."></textarea>
                         </div>
                     </div>
 
@@ -286,7 +286,7 @@
                 document.getElementById('bioLine1').value = bioLines[0] || '';
                 document.getElementById('bioLine2').value = bioLines[1] || '';
                 
-                document.getElementById('careerAspirations').value = p.careerAspirations || '';
+                document.getElementById('goalsVision').value = p.goalsVision || '';
                 document.getElementById('communityEngagement').value = p.communityEngagement || '';
                 document.getElementById('education').value = p.education || '';
                 document.getElementById('educationPeriod').value = p.educationPeriod || '';
@@ -326,7 +326,7 @@
             
             const payload = {
                 bio: combinedBio,
-                careerAspirations: document.getElementById('careerAspirations').value,
+                goalsVision: document.getElementById('goalsVision').value,
                 communityEngagement: communityEngagementValue,
                 education: document.getElementById('education').value,
                 educationPeriod: document.getElementById('educationPeriod').value,
