@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Community Engagement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-box {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+            background: #f5f5f5;
+        }
+        h2 {
+            color: #333;
+        }
+        pre {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Community Engagement Test Page</h1>
+    
+    <div class="test-box">
+        <h2>Test 1: Direct API Call</h2>
+        <button onclick="testAPI()">Fetch Profile Data</button>
+        <pre id="apiResult">Click button to test...</pre>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 2: Element Selection</h2>
+        <p class="bio-community" style="border: 1px solid red; padding: 10px;">
+            This is the bio-community element
+        </p>
+        <button onclick="testElement()">Test Element Selection</button>
+        <pre id="elementResult">Click button to test...</pre>
+    </div>
+    
+    <div class="test-box">
+        <h2>Test 3: Update Element</h2>
+        <p class="bio-community-test" style="border: 1px solid blue; padding: 10px;">
+            Original text
+        </p>
+        <button onclick="testUpdate()">Update Element</button>
+    </div>
+
+    <script src="api-helper.js"></script>
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('apiResult');
+            result.textContent = 'Loading...';
+            
+            try {
+                const profile = await getProfile();
+                console.log('Full profile:', profile);
+                
+                result.textContent = JSON.stringify({
+                    communityEngagement: profile.communityEngagement,
+                    length: profile.communityEngagement?.length,
+                    type: typeof profile.communityEngagement
+                }, null, 2);
+            } catch (error) {
+                result.textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        function testElement() {
+            const result = document.getElementById('elementResult');
+            const element = document.querySelector('.bio-community');
+            
+            result.textContent = JSON.stringify({
+                found: !!element,
+                innerHTML: element?.innerHTML,
+                textContent: element?.textContent
+            }, null, 2);
+        }
+        
+        async function testUpdate() {
+            const element = document.querySelector('.bio-community-test');
+            const profile = await getProfile();
+            
+            if (element && profile) {
+                element.innerHTML = profile.communityEngagement || 'NO DATA';
+                alert('Updated! Check the blue box.');
+            } else {
+                alert('Failed: element=' + !!element + ', profile=' + !!profile);
+            }
+        }
+    </script>
+</body>
+</html>
